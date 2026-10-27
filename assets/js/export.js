@@ -41,7 +41,7 @@ export async function exportPDF(hostId, filename, props = {}) {
     if (i > 0) doc.addPage('a4', 'p');
     doc.addImage(img, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
   }
-  doc.setProperties({ title: props.title || filename, subject: props.subject || '', author: '지원자 개인 데모', creator: 'lotteenc-pt-demo' });
+  doc.setProperties({ title: props.title || filename, subject: props.subject || '', author: '롯데건설 외주구매 지원자 노승수', creator: 'lotteenc-pt-demo' });
   const blob = doc.output('blob');
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');

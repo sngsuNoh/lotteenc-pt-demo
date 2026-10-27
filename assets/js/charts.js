@@ -95,7 +95,7 @@ function legendHTML(cfg) {
     if (r.legend) items.push(`<li><span class="sw sw--dash" style="color:var(--${esc(r.color || 'ink-2')})"></span>${esc(r.legend)}</li>`);
   });
   if (cfg.range && cfg.range.legend) {
-    items.push(`<li><span class="sw sw--range" style="color:var(--accent);background:var(--accent-tint)"></span>${esc(cfg.range.legend)}</li>`);
+    items.push(`<li><span class="sw sw--range" style="color:var(--band-stroke);background:var(--band-fill)"></span>${esc(cfg.range.legend)}</li>`);
   }
   return `<ul class="legend">${items.join('')}</ul>`;
 }
@@ -201,7 +201,7 @@ function drawLine(box, W, pal, cfg) {
     const x = xAt(cfg.range.at) + 15;
     const ya = yAt(cfg.range.hi);
     const yb = yAt(cfg.range.lo);
-    svg.appendChild(node('rect', { x: x - 4.5, y: Math.min(ya, yb), width: 9, height: Math.max(3, Math.abs(yb - ya)), rx: 3, fill: pal.c('accent-tint'), stroke: pal.c('accent'), 'stroke-width': 1.5 }));
+    svg.appendChild(node('rect', { x: x - 4.5, y: Math.min(ya, yb), width: 9, height: Math.max(3, Math.abs(yb - ya)), rx: 3, fill: pal.c('band-fill'), stroke: pal.c('band-stroke'), 'stroke-width': 1.5 }));
   }
 
   cfg.series.forEach((sr) => {

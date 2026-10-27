@@ -267,10 +267,10 @@ export function render(page, params, ctx) {
     if (req.linked) {
       rows.push({ code: auto === 'linked' ? 'linked' : 'linked_unmet', text: `연동 약정: 지표 변동이 ${pct(req.linkThreshold)} 이상이면 산식대로 조정` });
     }
-    rows.push({ code: 'reject', text: '지표가 오르지 않았으면(0% 이하) 증액 근거 없음' });
-    rows.push({ code: 'fast', text: `요청 ≤ 지표 + ${pp(P.tolerancePp)} = ${pct(i + P.tolerancePp)}` });
-    rows.push({ code: 'explain', text: `요청 ≤ 지표 × ${times(P.explainMultiple)} = ${pct(Math.max(i * P.explainMultiple, i + P.tolerancePp))}` });
-    rows.push({ code: 'deep', text: '그 밖의 경우' });
+    rows.push({ code: 'reject', text: '지표 상승률이 0% 이하면 증액 근거 없음' });
+    rows.push({ code: 'fast', text: `요청 상승률 ≤ 지표 상승률 + 허용오차 ${pp(P.tolerancePp)} = ${pct(i + P.tolerancePp)}` });
+    rows.push({ code: 'explain', text: `요청 상승률 ≤ 지표 상승률 × 소명 요청 배수 ${times(P.explainMultiple)} = ${pct(Math.max(i * P.explainMultiple, i + P.tolerancePp))}` });
+    rows.push({ code: 'deep', text: '위 두 기준을 모두 넘는 경우' });
     return `<ul class="rules">${rows.map((r) => `<li class="${r.code === auto ? 'is-hit' : ''}" data-v="${r.code}"><span>${vchipHTML(r.code)}</span><span>${esc(r.text)}${r.code === auto ? ' <span class="tag">해당</span>' : ''}</span></li>`).join('')}</ul>`;
   }
 

@@ -304,7 +304,7 @@ export function render(page, params, ctx) {
       const kind = mode === 'reply' ? '회신문' : '검토보고서';
       const fname = `${kind}_${id === 'new' ? '직접입력' : id}_${safeName(info.partner)}_${info.today.replace(/-/g, '')}.pdf`;
       try {
-        const url = await exportPDF(HOST, fname, { title: `${kind} ${caseTitle(s)}`, subject: '자재비 증액 요청 검토(지원자 개인 데모)' });
+        const url = await exportPDF(HOST, fname, { title: `${kind} ${caseTitle(s)}`, subject: '자재비 증액 요청 검토(데모, 가상 사례)' });
         const fb = page.querySelector('[data-fallback]');
         fb.innerHTML = `내려받기가 시작되지 않았다면 <a href="${url}" target="_blank" rel="noopener">PDF를 새 창에서 여세요</a>.`;
         fb.hidden = false;

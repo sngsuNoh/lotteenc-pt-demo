@@ -15,7 +15,6 @@ export async function render(page, params, ctx) {
   page.innerHTML = `
     <div class="page-head">
       <h1 class="page-title">발표자료</h1>
-      <p class="page-lead">${esc(m.slidesLead)}</p>
     </div>
     <div data-slides><p class="ink2">발표자료를 찾는 중입니다.</p></div>`;
   const box = page.querySelector('[data-slides]');
