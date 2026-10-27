@@ -1,0 +1,534 @@
+{
+  "data": {
+    "n_series": 48,
+    "months": "2015-01~2026-09",
+    "n_months": 141,
+    "n_values": 6697
+  },
+  "shock": {
+    "solvent": {
+      "peak_rise_pct": 320.1,
+      "peak_month": "2026-04",
+      "retrace_pct": 29.0,
+      "sep_vs_feb_pct": 248.2
+    },
+    "ethylene": {
+      "peak_rise_pct": 98.3,
+      "peak_month": "2026-04",
+      "retrace_pct": 64.0,
+      "sep_vs_feb_pct": 52.9
+    },
+    "crude_imp_krw": {
+      "peak_rise_pct": 88.5,
+      "peak_month": "2026-03",
+      "retrace_pct": 81.0,
+      "sep_vs_feb_pct": 51.8
+    },
+    "dubai": {
+      "peak_rise_pct": 85.0,
+      "peak_month": "2026-03",
+      "retrace_pct": 85.0,
+      "sep_vs_feb_pct": 63.2
+    },
+    "asphalt": {
+      "peak_rise_pct": 78.5,
+      "peak_month": "2026-06",
+      "retrace_pct": 46.0,
+      "sep_vs_feb_pct": 46.8
+    },
+    "naphtha": {
+      "peak_rise_pct": 75.2,
+      "peak_month": "2026-04",
+      "retrace_pct": 70.0,
+      "sep_vs_feb_pct": 39.8
+    },
+    "pur_foam": {
+      "peak_rise_pct": 66.5,
+      "peak_month": "2026-08",
+      "retrace_pct": 0.0,
+      "sep_vs_feb_pct": 66.5
+    },
+    "pe_resin": {
+      "peak_rise_pct": 62.8,
+      "peak_month": "2026-05",
+      "retrace_pct": 58.0,
+      "sep_vs_feb_pct": 30.3
+    },
+    "bunker_c": {
+      "peak_rise_pct": 58.1,
+      "peak_month": "2026-04",
+      "retrace_pct": 37.0,
+      "sep_vs_feb_pct": 43.4
+    },
+    "propylene": {
+      "peak_rise_pct": 49.4,
+      "peak_month": "2026-04",
+      "retrace_pct": 56.0,
+      "sep_vs_feb_pct": 30.0
+    },
+    "diesel": {
+      "peak_rise_pct": 45.8,
+      "peak_month": "2026-05",
+      "retrace_pct": 35.0,
+      "sep_vs_feb_pct": 31.0
+    },
+    "ppg_polyol": {
+      "peak_rise_pct": 43.9,
+      "peak_month": "2026-05",
+      "retrace_pct": 22.0,
+      "sep_vs_feb_pct": 34.3
+    },
+    "ascon": {
+      "peak_rise_pct": 41.8,
+      "peak_month": "2026-04",
+      "retrace_pct": 4.0,
+      "sep_vs_feb_pct": 40.2
+    },
+    "mdi": {
+      "peak_rise_pct": 36.8,
+      "peak_month": "2026-04",
+      "retrace_pct": 34.0,
+      "sep_vs_feb_pct": 24.4
+    },
+    "pvc_resin": {
+      "peak_rise_pct": 34.6,
+      "peak_month": "2026-05",
+      "retrace_pct": 76.0,
+      "sep_vs_feb_pct": 8.2
+    },
+    "adhesive": {
+      "peak_rise_pct": 32.6,
+      "peak_month": "2026-05",
+      "retrace_pct": 24.0,
+      "sep_vs_feb_pct": 24.9
+    },
+    "plastic_pipe": {
+      "peak_rise_pct": 30.3,
+      "peak_month": "2026-04",
+      "retrace_pct": 7.0,
+      "sep_vs_feb_pct": 28.2
+    },
+    "benzene": {
+      "peak_rise_pct": 29.8,
+      "peak_month": "2026-05",
+      "retrace_pct": 57.0,
+      "sep_vs_feb_pct": 18.4
+    },
+    "styrene_monomer": {
+      "peak_rise_pct": 29.3,
+      "peak_month": "2026-04",
+      "retrace_pct": 81.0,
+      "sep_vs_feb_pct": 13.9
+    },
+    "pu_resin": {
+      "peak_rise_pct": 20.3,
+      "peak_month": "2026-05",
+      "retrace_pct": 24.0,
+      "sep_vs_feb_pct": 15.4
+    },
+    "thinner": {
+      "peak_rise_pct": 18.1,
+      "peak_month": "2026-04",
+      "retrace_pct": 0.0,
+      "sep_vs_feb_pct": 18.1
+    },
+    "chemicals": {
+      "peak_rise_pct": 18.0,
+      "peak_month": "2026-05",
+      "retrace_pct": 23.0,
+      "sep_vs_feb_pct": 15.0
+    },
+    "eps_foam": {
+      "peak_rise_pct": 17.4,
+      "peak_month": "2026-05",
+      "retrace_pct": 34.0,
+      "sep_vs_feb_pct": 11.4
+    },
+    "epoxy_resin": {
+      "peak_rise_pct": 16.9,
+      "peak_month": "2026-05",
+      "retrace_pct": 19.0,
+      "sep_vs_feb_pct": 13.8
+    },
+    "ps_resin": {
+      "peak_rise_pct": 15.4,
+      "peak_month": "2026-05",
+      "retrace_pct": 24.0,
+      "sep_vs_feb_pct": 11.8
+    },
+    "paint_epoxy": {
+      "peak_rise_pct": 14.0,
+      "peak_month": "2026-06",
+      "retrace_pct": 18.0,
+      "sep_vs_feb_pct": 11.4
+    },
+    "section_steel": {
+      "peak_rise_pct": 13.7,
+      "peak_month": "2026-08",
+      "retrace_pct": 0.0,
+      "sep_vs_feb_pct": 13.7
+    },
+    "paint_oil": {
+      "peak_rise_pct": 12.8,
+      "peak_month": "2026-04",
+      "retrace_pct": 0.0,
+      "sep_vs_feb_pct": 12.8
+    },
+    "plastic_tile": {
+      "peak_rise_pct": 12.7,
+      "peak_month": "2026-07",
+      "retrace_pct": 0.0,
+      "sep_vs_feb_pct": 12.7
+    },
+    "rebar": {
+      "peak_rise_pct": 12.4,
+      "peak_month": "2026-08",
+      "retrace_pct": 0.0,
+      "sep_vs_feb_pct": 12.4
+    },
+    "paint_water": {
+      "peak_rise_pct": 10.3,
+      "peak_month": "2026-04",
+      "retrace_pct": 0.0,
+      "sep_vs_feb_pct": 10.3
+    },
+    "paint_urethane": {
+      "peak_rise_pct": 8.9,
+      "peak_month": "2026-04",
+      "retrace_pct": 0.0,
+      "sep_vs_feb_pct": 8.9
+    },
+    "plastic_window": {
+      "peak_rise_pct": 8.3,
+      "peak_month": "2026-04",
+      "retrace_pct": 59.0,
+      "sep_vs_feb_pct": 3.4
+    },
+    "plasticizer": {
+      "peak_rise_pct": 7.1,
+      "peak_month": "2026-05",
+      "retrace_pct": 100.0,
+      "sep_vs_feb_pct": 0.0
+    },
+    "plastic_sash": {
+      "peak_rise_pct": 6.3,
+      "peak_month": "2026-04",
+      "retrace_pct": 59.0,
+      "sep_vs_feb_pct": 2.6
+    },
+    "metal_window": {
+      "peak_rise_pct": 6.1,
+      "peak_month": "2026-08",
+      "retrace_pct": 0.0,
+      "sep_vs_feb_pct": 6.1
+    },
+    "ppi_total": {
+      "peak_rise_pct": 5.4,
+      "peak_month": "2026-05",
+      "retrace_pct": 8.0,
+      "sep_vs_feb_pct": 5.3
+    },
+    "plastic_floor": {
+      "peak_rise_pct": 5.3,
+      "peak_month": "2026-08",
+      "retrace_pct": 6.0,
+      "sep_vs_feb_pct": 5.0
+    },
+    "flat_glass": {
+      "peak_rise_pct": 4.6,
+      "peak_month": "2026-04",
+      "retrace_pct": 100.0,
+      "sep_vs_feb_pct": 0.0
+    },
+    "remicon": {
+      "peak_rise_pct": 4.5,
+      "peak_month": "2026-04",
+      "retrace_pct": 0.0,
+      "sep_vs_feb_pct": 4.5
+    },
+    "truck_freight": {
+      "peak_rise_pct": 2.1,
+      "peak_month": "2026-08",
+      "retrace_pct": 0.0,
+      "sep_vs_feb_pct": 2.1
+    },
+    "gypsum": {
+      "peak_rise_pct": 1.3,
+      "peak_month": "2026-06",
+      "retrace_pct": 16.0,
+      "sep_vs_feb_pct": 1.1
+    },
+    "crushed_stone": {
+      "peak_rise_pct": 0.6,
+      "peak_month": "2026-06",
+      "retrace_pct": 0.0,
+      "sep_vs_feb_pct": 0.6
+    },
+    "mineral_wool": {
+      "peak_rise_pct": 0.0,
+      "peak_month": "2026-03",
+      "retrace_pct": null,
+      "sep_vs_feb_pct": 0.0
+    },
+    "cement": {
+      "peak_rise_pct": 0.0,
+      "peak_month": "2026-03",
+      "retrace_pct": null,
+      "sep_vs_feb_pct": -0.4
+    },
+    "power_industrial": {
+      "peak_rise_pct": 0.0,
+      "peak_month": "2026-03",
+      "retrace_pct": null,
+      "sep_vs_feb_pct": -1.4
+    },
+    "mortar": {
+      "peak_rise_pct": 0.0,
+      "peak_month": "2026-03",
+      "retrace_pct": null,
+      "sep_vs_feb_pct": 0.0
+    }
+  },
+  "asymmetry_robust_pairs": [
+    "원유 → 아스팔트",
+    "나프타 → 프로필렌",
+    "MDI → 우레탄 단열재",
+    "폴리올 → 우레탄 단열재",
+    "PVC수지 → 플라스틱파이프",
+    "PVC수지 → 플라스틱 바닥타일",
+    "나프타 → 유성페인트",
+    "나프타 → 수성페인트",
+    "나프타 → 우레탄도료",
+    "나프타 → 합성수지접착제",
+    "경유 → 도로화물운송"
+  ],
+  "explained_vs_actual": [
+    {
+      "pair": "MDI → 우레탄 단열재",
+      "input_rise_pct": 36.8,
+      "explained_pct": 32.1,
+      "explained_lo90": 17.8,
+      "explained_hi90": 48.2,
+      "actual_peak_pct": 66.5,
+      "verdict": "원료 대비 초과 상승"
+    },
+    {
+      "pair": "폴리올 → 우레탄 단열재",
+      "input_rise_pct": 43.9,
+      "explained_pct": 69.3,
+      "explained_lo90": 54.2,
+      "explained_hi90": 85.8,
+      "actual_peak_pct": 66.5,
+      "verdict": "원료로 설명됨"
+    },
+    {
+      "pair": "스티렌모노머 → EPS 단열재",
+      "input_rise_pct": 29.3,
+      "explained_pct": 6.0,
+      "explained_lo90": 0.7,
+      "explained_hi90": 11.6,
+      "actual_peak_pct": 17.4,
+      "verdict": "원료 대비 초과 상승"
+    },
+    {
+      "pair": "PVC수지 → 플라스틱파이프",
+      "input_rise_pct": 33.1,
+      "explained_pct": 44.8,
+      "explained_lo90": 28.7,
+      "explained_hi90": 62.8,
+      "actual_peak_pct": 30.3,
+      "verdict": "원료로 설명됨"
+    },
+    {
+      "pair": "PVC수지 → 플라스틱 바닥타일",
+      "input_rise_pct": 34.6,
+      "explained_pct": 11.7,
+      "explained_lo90": 6.0,
+      "explained_hi90": 17.8,
+      "actual_peak_pct": 12.7,
+      "verdict": "원료로 설명됨"
+    },
+    {
+      "pair": "나프타 → 유성페인트",
+      "input_rise_pct": 75.2,
+      "explained_pct": 9.6,
+      "explained_lo90": 5.8,
+      "explained_hi90": 13.5,
+      "actual_peak_pct": 12.8,
+      "verdict": "원료로 설명됨"
+    },
+    {
+      "pair": "나프타 → 에폭시도료",
+      "input_rise_pct": 75.2,
+      "explained_pct": 11.1,
+      "explained_lo90": 6.7,
+      "explained_hi90": 15.6,
+      "actual_peak_pct": 14.0,
+      "verdict": "원료로 설명됨"
+    },
+    {
+      "pair": "나프타 → 합성수지접착제",
+      "input_rise_pct": 75.2,
+      "explained_pct": 21.6,
+      "explained_lo90": 13.3,
+      "explained_hi90": 30.6,
+      "actual_peak_pct": 32.6,
+      "verdict": "원료 대비 초과 상승"
+    },
+    {
+      "pair": "아스팔트 → 아스콘",
+      "input_rise_pct": 76.2,
+      "explained_pct": 38.3,
+      "explained_lo90": 18.1,
+      "explained_hi90": 62.0,
+      "actual_peak_pct": 41.8,
+      "verdict": "원료로 설명됨"
+    }
+  ],
+  "base_month_sensitivity": [
+    {
+      "series": "eps_foam",
+      "name": "폴리스티렌발포제품(EPS 단열재)",
+      "compare_month": "2026-05",
+      "from_2025-06": 37.7,
+      "from_2025-09": 24.5,
+      "from_2025-12": 21.6,
+      "from_2026-02": 17.4,
+      "spread_pp": 20.3
+    },
+    {
+      "series": "pur_foam",
+      "name": "우레탄발포제품(우레탄 단열재)",
+      "compare_month": "2026-08",
+      "from_2025-06": 65.4,
+      "from_2025-09": 66.5,
+      "from_2025-12": 66.5,
+      "from_2026-02": 66.5,
+      "spread_pp": 1.1
+    },
+    {
+      "series": "ascon",
+      "name": "아스콘",
+      "compare_month": "2026-04",
+      "from_2025-06": 36.9,
+      "from_2025-09": 39.8,
+      "from_2025-12": 39.8,
+      "from_2026-02": 41.8,
+      "spread_pp": 4.9
+    },
+    {
+      "series": "plastic_pipe",
+      "name": "플라스틱파이프",
+      "compare_month": "2026-04",
+      "from_2025-06": 30.3,
+      "from_2025-09": 30.3,
+      "from_2025-12": 30.3,
+      "from_2026-02": 30.3,
+      "spread_pp": 0.0
+    },
+    {
+      "series": "paint_oil",
+      "name": "유성페인트",
+      "compare_month": "2026-04",
+      "from_2025-06": 12.8,
+      "from_2025-09": 12.8,
+      "from_2025-12": 12.8,
+      "from_2026-02": 12.8,
+      "spread_pp": 0.0
+    },
+    {
+      "series": "rebar",
+      "name": "일반철근",
+      "compare_month": "2026-08",
+      "from_2025-06": 13.7,
+      "from_2025-09": 15.6,
+      "from_2025-12": 17.8,
+      "from_2026-02": 12.4,
+      "spread_pp": 5.4
+    },
+    {
+      "series": "remicon",
+      "name": "레미콘",
+      "compare_month": "2026-04",
+      "from_2025-06": 0.3,
+      "from_2025-09": 2.4,
+      "from_2025-12": 4.0,
+      "from_2026-02": 4.5,
+      "spread_pp": 4.2
+    }
+  ],
+  "second_wave": [
+    {
+      "series": "dubai",
+      "name": "두바이유",
+      "jul_to_sep_pct": 45.0,
+      "feb_to_sep_pct": 63.2
+    },
+    {
+      "series": "crude_imp_krw",
+      "name": "수입물가 원유(원화기준)",
+      "jul_to_sep_pct": 29.8,
+      "feb_to_sep_pct": 51.8
+    },
+    {
+      "series": "naphtha",
+      "name": "나프타",
+      "jul_to_sep_pct": 3.0,
+      "feb_to_sep_pct": 39.8
+    },
+    {
+      "series": "pvc_resin",
+      "name": "PVC수지",
+      "jul_to_sep_pct": -0.7,
+      "feb_to_sep_pct": 8.2
+    },
+    {
+      "series": "pe_resin",
+      "name": "폴리에틸렌수지",
+      "jul_to_sep_pct": 3.3,
+      "feb_to_sep_pct": 30.3
+    },
+    {
+      "series": "pur_foam",
+      "name": "우레탄발포제품(우레탄 단열재)",
+      "jul_to_sep_pct": 1.0,
+      "feb_to_sep_pct": 66.5
+    },
+    {
+      "series": "eps_foam",
+      "name": "폴리스티렌발포제품(EPS 단열재)",
+      "jul_to_sep_pct": -2.4,
+      "feb_to_sep_pct": 11.4
+    },
+    {
+      "series": "ascon",
+      "name": "아스콘",
+      "jul_to_sep_pct": -1.2,
+      "feb_to_sep_pct": 40.2
+    },
+    {
+      "series": "plastic_pipe",
+      "name": "플라스틱파이프",
+      "jul_to_sep_pct": 0.0,
+      "feb_to_sep_pct": 28.2
+    },
+    {
+      "series": "paint_oil",
+      "name": "유성페인트",
+      "jul_to_sep_pct": 0.0,
+      "feb_to_sep_pct": 12.8
+    },
+    {
+      "series": "adhesive",
+      "name": "합성수지접착제",
+      "jul_to_sep_pct": -0.9,
+      "feb_to_sep_pct": 24.9
+    },
+    {
+      "series": "rebar",
+      "name": "일반철근",
+      "jul_to_sep_pct": 0.6,
+      "feb_to_sep_pct": 12.4
+    }
+  ]
+}

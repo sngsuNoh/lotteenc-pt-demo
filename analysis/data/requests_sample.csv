@@ -1,0 +1,6 @@
+request_id,partner,channel,subcontract,item,material_cost,base_month,request_month,requested_rate,progress_done,prepurchased,advance_funded,linked,link_ratio,link_threshold,partner_delay_months,evidence_rate,received,note
+S1_EPS단열,가상 A단열(외주 파트너사),외주 파트너사(사급자재),true,eps_foam,450000000,2026-02,2026-05,0.40,0.30,0.20,0,false,,,0,,2026-05-12,같은 '단열재 40%' 요청이라도 EPS는 지표가 17% 올랐다
+S2_우레탄단열,가상 B단열(외주 파트너사),외주 파트너사(사급자재),true,pur_foam,450000000,2026-02,2026-05,0.40,0.30,0.20,0,false,,,0,,2026-05-12,우레탄 단열재 지표는 60% 올라 요청 40%는 지표 이내
+S3_유성페인트,가상 C도료(자재 파트너사),자재 파트너사(직접 구매),false,paint_oil,300000000,2026-02,2026-04,0.25,0.40,0,0,false,,,0,,2026-04-08,시장 공문 20~30%가 2주 만에 평균 10% 안팎으로 하향된 품목
+S4_아스콘,가상 D포장(외주 파트너사),외주 파트너사(사급자재),true,ascon,600000000,2026-02,2026-04,0.40,0.25,0,0,false,,,0,,2026-04-20,아스콘은 원료(아스팔트)로 설명되는 상승
+S5_PVC배관_2차,가상 E설비(외주 파트너사),외주 파트너사(사급자재),true,plastic_pipe,200000000,2026-06,2026-09,0.15,0.50,0,0,false,,,0,,2026-10-05,6월 조정 후 유가 재상승을 이유로 한 2차 요청

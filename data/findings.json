@@ -1,0 +1,483 @@
+{
+"base": "2026-02",
+"shock": [
+{
+"key": "solvent",
+"peak_rise_pct": 320.1,
+"peak_month": "2026-04",
+"retrace_pct": 29.0,
+"sep_vs_feb_pct": 248.2
+},
+{
+"key": "ethylene",
+"peak_rise_pct": 98.3,
+"peak_month": "2026-04",
+"retrace_pct": 64.0,
+"sep_vs_feb_pct": 52.9
+},
+{
+"key": "crude_imp_krw",
+"peak_rise_pct": 88.5,
+"peak_month": "2026-03",
+"retrace_pct": 81.0,
+"sep_vs_feb_pct": 51.8
+},
+{
+"key": "dubai",
+"peak_rise_pct": 85.0,
+"peak_month": "2026-03",
+"retrace_pct": 85.0,
+"sep_vs_feb_pct": 63.2
+},
+{
+"key": "asphalt",
+"peak_rise_pct": 78.5,
+"peak_month": "2026-06",
+"retrace_pct": 46.0,
+"sep_vs_feb_pct": 46.8
+},
+{
+"key": "naphtha",
+"peak_rise_pct": 75.2,
+"peak_month": "2026-04",
+"retrace_pct": 70.0,
+"sep_vs_feb_pct": 39.8
+},
+{
+"key": "pur_foam",
+"peak_rise_pct": 66.5,
+"peak_month": "2026-08",
+"retrace_pct": 0.0,
+"sep_vs_feb_pct": 66.5
+},
+{
+"key": "pe_resin",
+"peak_rise_pct": 62.8,
+"peak_month": "2026-05",
+"retrace_pct": 58.0,
+"sep_vs_feb_pct": 30.3
+},
+{
+"key": "bunker_c",
+"peak_rise_pct": 58.1,
+"peak_month": "2026-04",
+"retrace_pct": 37.0,
+"sep_vs_feb_pct": 43.4
+},
+{
+"key": "propylene",
+"peak_rise_pct": 49.4,
+"peak_month": "2026-04",
+"retrace_pct": 56.0,
+"sep_vs_feb_pct": 30.0
+},
+{
+"key": "diesel",
+"peak_rise_pct": 45.8,
+"peak_month": "2026-05",
+"retrace_pct": 35.0,
+"sep_vs_feb_pct": 31.0
+},
+{
+"key": "ppg_polyol",
+"peak_rise_pct": 43.9,
+"peak_month": "2026-05",
+"retrace_pct": 22.0,
+"sep_vs_feb_pct": 34.3
+},
+{
+"key": "ascon",
+"peak_rise_pct": 41.8,
+"peak_month": "2026-04",
+"retrace_pct": 4.0,
+"sep_vs_feb_pct": 40.2
+},
+{
+"key": "mdi",
+"peak_rise_pct": 36.8,
+"peak_month": "2026-04",
+"retrace_pct": 34.0,
+"sep_vs_feb_pct": 24.4
+},
+{
+"key": "pvc_resin",
+"peak_rise_pct": 34.6,
+"peak_month": "2026-05",
+"retrace_pct": 76.0,
+"sep_vs_feb_pct": 8.2
+},
+{
+"key": "adhesive",
+"peak_rise_pct": 32.6,
+"peak_month": "2026-05",
+"retrace_pct": 24.0,
+"sep_vs_feb_pct": 24.9
+},
+{
+"key": "plastic_pipe",
+"peak_rise_pct": 30.3,
+"peak_month": "2026-04",
+"retrace_pct": 7.0,
+"sep_vs_feb_pct": 28.2
+},
+{
+"key": "benzene",
+"peak_rise_pct": 29.8,
+"peak_month": "2026-05",
+"retrace_pct": 57.0,
+"sep_vs_feb_pct": 18.4
+},
+{
+"key": "styrene_monomer",
+"peak_rise_pct": 29.3,
+"peak_month": "2026-04",
+"retrace_pct": 81.0,
+"sep_vs_feb_pct": 13.9
+},
+{
+"key": "pu_resin",
+"peak_rise_pct": 20.3,
+"peak_month": "2026-05",
+"retrace_pct": 24.0,
+"sep_vs_feb_pct": 15.4
+},
+{
+"key": "thinner",
+"peak_rise_pct": 18.1,
+"peak_month": "2026-04",
+"retrace_pct": 0.0,
+"sep_vs_feb_pct": 18.1
+},
+{
+"key": "chemicals",
+"peak_rise_pct": 18.0,
+"peak_month": "2026-05",
+"retrace_pct": 23.0,
+"sep_vs_feb_pct": 15.0
+},
+{
+"key": "eps_foam",
+"peak_rise_pct": 17.4,
+"peak_month": "2026-05",
+"retrace_pct": 34.0,
+"sep_vs_feb_pct": 11.4
+},
+{
+"key": "epoxy_resin",
+"peak_rise_pct": 16.9,
+"peak_month": "2026-05",
+"retrace_pct": 19.0,
+"sep_vs_feb_pct": 13.8
+},
+{
+"key": "ps_resin",
+"peak_rise_pct": 15.4,
+"peak_month": "2026-05",
+"retrace_pct": 24.0,
+"sep_vs_feb_pct": 11.8
+},
+{
+"key": "paint_epoxy",
+"peak_rise_pct": 14.0,
+"peak_month": "2026-06",
+"retrace_pct": 18.0,
+"sep_vs_feb_pct": 11.4
+},
+{
+"key": "section_steel",
+"peak_rise_pct": 13.7,
+"peak_month": "2026-08",
+"retrace_pct": 0.0,
+"sep_vs_feb_pct": 13.7
+},
+{
+"key": "paint_oil",
+"peak_rise_pct": 12.8,
+"peak_month": "2026-04",
+"retrace_pct": 0.0,
+"sep_vs_feb_pct": 12.8
+},
+{
+"key": "plastic_tile",
+"peak_rise_pct": 12.7,
+"peak_month": "2026-07",
+"retrace_pct": 0.0,
+"sep_vs_feb_pct": 12.7
+},
+{
+"key": "rebar",
+"peak_rise_pct": 12.4,
+"peak_month": "2026-08",
+"retrace_pct": 0.0,
+"sep_vs_feb_pct": 12.4
+},
+{
+"key": "paint_water",
+"peak_rise_pct": 10.3,
+"peak_month": "2026-04",
+"retrace_pct": 0.0,
+"sep_vs_feb_pct": 10.3
+},
+{
+"key": "paint_urethane",
+"peak_rise_pct": 8.9,
+"peak_month": "2026-04",
+"retrace_pct": 0.0,
+"sep_vs_feb_pct": 8.9
+},
+{
+"key": "plastic_window",
+"peak_rise_pct": 8.3,
+"peak_month": "2026-04",
+"retrace_pct": 59.0,
+"sep_vs_feb_pct": 3.4
+},
+{
+"key": "plasticizer",
+"peak_rise_pct": 7.1,
+"peak_month": "2026-05",
+"retrace_pct": 100.0,
+"sep_vs_feb_pct": 0.0
+},
+{
+"key": "plastic_sash",
+"peak_rise_pct": 6.3,
+"peak_month": "2026-04",
+"retrace_pct": 59.0,
+"sep_vs_feb_pct": 2.6
+},
+{
+"key": "metal_window",
+"peak_rise_pct": 6.1,
+"peak_month": "2026-08",
+"retrace_pct": 0.0,
+"sep_vs_feb_pct": 6.1
+},
+{
+"key": "ppi_total",
+"peak_rise_pct": 5.4,
+"peak_month": "2026-05",
+"retrace_pct": 8.0,
+"sep_vs_feb_pct": 5.3
+},
+{
+"key": "plastic_floor",
+"peak_rise_pct": 5.3,
+"peak_month": "2026-08",
+"retrace_pct": 6.0,
+"sep_vs_feb_pct": 5.0
+},
+{
+"key": "flat_glass",
+"peak_rise_pct": 4.6,
+"peak_month": "2026-04",
+"retrace_pct": 100.0,
+"sep_vs_feb_pct": 0.0
+},
+{
+"key": "remicon",
+"peak_rise_pct": 4.5,
+"peak_month": "2026-04",
+"retrace_pct": 0.0,
+"sep_vs_feb_pct": 4.5
+},
+{
+"key": "truck_freight",
+"peak_rise_pct": 2.1,
+"peak_month": "2026-08",
+"retrace_pct": 0.0,
+"sep_vs_feb_pct": 2.1
+},
+{
+"key": "gypsum",
+"peak_rise_pct": 1.3,
+"peak_month": "2026-06",
+"retrace_pct": 16.0,
+"sep_vs_feb_pct": 1.1
+},
+{
+"key": "crushed_stone",
+"peak_rise_pct": 0.6,
+"peak_month": "2026-06",
+"retrace_pct": 0.0,
+"sep_vs_feb_pct": 0.6
+},
+{
+"key": "mineral_wool",
+"peak_rise_pct": 0.0,
+"peak_month": "2026-03",
+"retrace_pct": null,
+"sep_vs_feb_pct": 0.0
+},
+{
+"key": "cement",
+"peak_rise_pct": 0.0,
+"peak_month": "2026-03",
+"retrace_pct": null,
+"sep_vs_feb_pct": -0.4
+},
+{
+"key": "power_industrial",
+"peak_rise_pct": 0.0,
+"peak_month": "2026-03",
+"retrace_pct": null,
+"sep_vs_feb_pct": -1.4
+},
+{
+"key": "mortar",
+"peak_rise_pct": 0.0,
+"peak_month": "2026-03",
+"retrace_pct": null,
+"sep_vs_feb_pct": 0.0
+}
+],
+"secondWave": [
+{
+"key": "dubai",
+"jul_to_sep_pct": 45.0,
+"feb_to_sep_pct": 63.2
+},
+{
+"key": "crude_imp_krw",
+"jul_to_sep_pct": 29.8,
+"feb_to_sep_pct": 51.8
+},
+{
+"key": "naphtha",
+"jul_to_sep_pct": 3.0,
+"feb_to_sep_pct": 39.8
+},
+{
+"key": "pvc_resin",
+"jul_to_sep_pct": -0.7,
+"feb_to_sep_pct": 8.2
+},
+{
+"key": "pe_resin",
+"jul_to_sep_pct": 3.3,
+"feb_to_sep_pct": 30.3
+},
+{
+"key": "pur_foam",
+"jul_to_sep_pct": 1.0,
+"feb_to_sep_pct": 66.5
+},
+{
+"key": "eps_foam",
+"jul_to_sep_pct": -2.4,
+"feb_to_sep_pct": 11.4
+},
+{
+"key": "ascon",
+"jul_to_sep_pct": -1.2,
+"feb_to_sep_pct": 40.2
+},
+{
+"key": "plastic_pipe",
+"jul_to_sep_pct": 0.0,
+"feb_to_sep_pct": 28.2
+},
+{
+"key": "paint_oil",
+"jul_to_sep_pct": 0.0,
+"feb_to_sep_pct": 12.8
+},
+{
+"key": "adhesive",
+"jul_to_sep_pct": -0.9,
+"feb_to_sep_pct": 24.9
+},
+{
+"key": "rebar",
+"jul_to_sep_pct": 0.6,
+"feb_to_sep_pct": 12.4
+}
+],
+"claims": [
+{
+"group": "도료",
+"claim": "KCC 인상 공문(이후 철회)",
+"lo": 10,
+"hi": 40,
+"date": "2026-03-23",
+"source": "뉴스1",
+"url": "https://www.news1.kr/industry/sb-founded/6125783",
+"keys": [
+"paint_oil",
+"paint_water",
+"paint_urethane",
+"paint_epoxy"
+]
+},
+{
+"group": "도료",
+"claim": "노루페인트 주요 제품 공문 → 평균 10% 안팎으로 하향",
+"lo": 20,
+"hi": 30,
+"date": "2026-03",
+"source": "뉴스1",
+"url": "https://www.news1.kr/industry/sb-founded/6125783",
+"keys": [
+"paint_oil",
+"paint_water",
+"paint_urethane",
+"paint_epoxy"
+]
+},
+{
+"group": "도료",
+"claim": "SP삼화 전 제품 평균 20% → 평균 10%로 축소",
+"lo": 20,
+"hi": 20,
+"date": "2026-03-20",
+"source": "뉴스1",
+"url": "https://www.news1.kr/industry/sb-founded/6125783",
+"keys": [
+"paint_oil",
+"paint_water",
+"paint_urethane",
+"paint_epoxy"
+]
+},
+{
+"group": "단열재 등 마감재",
+"claim": "현대건설 자재 협력사 안내(단열재·페인트·방수재 등)",
+"lo": 10,
+"hi": 40,
+"date": "2026-04",
+"source": "헤럴드경제",
+"url": "https://heraldk.com/2026/04/14/%e2%80%9c%ec%a4%91%eb%8f%99%ec%a0%84%ec%9f%81%ec%9c%bc%eb%a1%9c-%ec%9e%90%ec%9e%ac%ec%88%98%ea%b8%89-%eb%b9%84%ec%83%81-%ea%b0%80%ea%b2%a9-%ec%9d%b8%ec%83%81%eb%8f%84-%ed%86%b5%eb%b3%b4%eb%b0%9b/",
+"keys": [
+"eps_foam",
+"pur_foam",
+"mineral_wool"
+]
+},
+{
+"group": "단열재",
+"claim": "내장·단열재(EPS·우레탄) 전년 대비 상승 보도",
+"lo": 30,
+"hi": 50,
+"date": "2026-04-01",
+"source": "뉴시스",
+"url": "https://www.newsis.com/view/NISX20260331_0003571306",
+"keys": [
+"eps_foam",
+"pur_foam",
+"mineral_wool"
+]
+},
+{
+"group": "아스콘",
+"claim": "관급가격 톤당 9.4만 원 → 13만 원 예상(약 38%)",
+"lo": 38,
+"hi": 38,
+"date": "2026-04-06",
+"source": "전북일보",
+"url": "https://www.jjan.kr/articleAmp/20260406500029",
+"keys": [
+"ascon"
+]
+}
+]
+}
