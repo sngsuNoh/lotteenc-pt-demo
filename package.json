@@ -1,0 +1,11 @@
+{
+  "name": "lotteenc-pt-demo",
+  "private": true,
+  "type": "module",
+  "description": "자재비 증액 요청 검증 데모(지원자 개인 데모, 정적 사이트)",
+  "scripts": {
+    "test": "node tools/test_engine.mjs && node tools/test_narratives.mjs",
+    "build:data": "python3 tools/build_data.py",
+    "serve": "python3 -m http.server 8000"
+  }
+}
