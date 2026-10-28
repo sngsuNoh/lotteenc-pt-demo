@@ -238,6 +238,8 @@ button { font: inherit; color: inherit; }
 .page-head { margin-bottom: 18px; }
 .page-title { font-size: 26px; font-weight: 700; letter-spacing: -0.015em; }
 .page-lead { margin-top: 8px; color: var(--ink-2); font-size: 15.5px; }
+.page-note { margin-top: 6px; color: var(--muted); font-size: 13.5px; }
+.nw { white-space: nowrap; }
 .backlink {
   display: inline-flex; align-items: center; gap: 4px; min-height: 40px;
   color: var(--ink-2); text-decoration: none; font-size: 14.5px; margin-bottom: 4px;
@@ -377,6 +379,7 @@ button { font: inherit; color: inherit; }
 .slip-item { font-size: 15px; font-weight: 700; line-height: 1.35; }
 .slip-req { margin-top: 8px; font-size: 32px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
 .slip-req small { display: block; margin-top: 2px; font-size: 12.5px; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+.slip-req small b { color: var(--ink); font-weight: 600; }
 .slip-facts { margin-top: 10px; font-size: 13px; line-height: 1.5; color: var(--ink-2); }
 .slip-facts b { color: var(--ink); font-weight: 600; }
 .slip .stamp { position: absolute; right: 10px; bottom: 12px; }
