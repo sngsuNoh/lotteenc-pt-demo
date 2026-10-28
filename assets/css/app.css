@@ -213,6 +213,12 @@ button { font: inherit; color: inherit; }
   background: var(--sheet);
   border-top: 1px solid var(--rule);
   padding-bottom: env(safe-area-inset-bottom);
+  transition: transform 0.22s ease;
+}
+/* 아래로 스크롤하면 숨고, 위로 스크롤하면 다시 나온다 */
+.tabbar.is-hidden { transform: translateY(calc(100% + 2px)); }
+@media (prefers-reduced-motion: reduce) {
+  .tabbar { transition: none; }
 }
 .tabbar-inner { max-width: 640px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); }
 .tab {
