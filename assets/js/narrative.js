@@ -46,11 +46,11 @@ export function ruleNarrative(req, res, ctx) {
   else headline = `연동 약정의 조정 요건(${pct(req.linkThreshold)})에 못 미쳐 이번에는 조정하지 않습니다. 필요하면 조정 협의로 전환합니다.`;
 
   const summary = [
-    `${req.partner || '파트너사'} 측은 ${item} 재료비 ${won(req.materialCost)}에 대해 ${reqp}(${won(res.requestedAmount)}) 인상을 요청했습니다.`,
+    `${req.partner || '파트너사'} 측은 ${item} 재료비 ${won(req.materialCost)}에 대해 ${reqp}(${won(res.requestedAmount)}) 증액을 요청했습니다.`,
     ovIdx
-      ? `같은 기간(${ym(req.baseMonth)} → ${ym(res.comp)}) 공표 지표는 ${pct(res.autoIndexRate, { sign: true })}였고, 담당자가 확인한 상승률 ${idx}를 적용했습니다. 요청과 ${pp(Math.abs(res.gapPp))} 차이가 납니다.`
+      ? `같은 기간(${ym(req.baseMonth)} → ${ym(res.comp)}) 공표 지표는 ${pct(res.autoIndexRate, { sign: true })}였고, 담당자가 확인한 상승률 ${idx}를 적용했습니다. 파트너사가 제시한 증액률 ${reqp}와 ${pp(Math.abs(res.gapPp))} 차이가 납니다.`
       : res.indexRate >= 0
-        ? `같은 기간(${ym(req.baseMonth)} → ${ym(res.comp)}) 공표 지표는 ${idx} 올라, 요청과 ${pp(Math.abs(res.gapPp))} 차이가 납니다.`
+        ? `같은 기간(${ym(req.baseMonth)} → ${ym(res.comp)}) 공표 지표는 ${idx} 올라, 파트너사가 제시한 증액률 ${reqp}와 ${pp(Math.abs(res.gapPp))} 차이가 납니다.`
         : `같은 기간(${ym(req.baseMonth)} → ${ym(res.comp)}) 공표 지표는 ${pct(Math.abs(res.indexRate))} 내렸습니다.`,
     res.recognizedNow > 0
       ? `기성 ${pct(req.progressDone || 0)}와 선매입·선급금 ${pct(res.excl)}를 뺀 조정 대상 재료비 ${won(res.eligible)}에 ${pct(res.rateNow)}${ovApp ? '(담당자 조정)' : ''}를 적용해 ${won(res.recognizedNow)}을 우선 인정합니다.${res.recognizedMax > res.recognizedNow ? ` 소명되면 최대 ${won(res.recognizedMax)}까지 인정합니다.` : ''}`

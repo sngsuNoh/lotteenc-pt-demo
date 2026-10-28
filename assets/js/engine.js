@@ -1,4 +1,4 @@
-// 자재비 인상 요청 검증 엔진.
+// 자재비 증액 요청 검증 엔진.
 // analysis/src/verify_tool.py의 규칙을 그대로 옮겼다. 숫자는 모두 여기서 만든다.
 
 export const DEFAULT_POLICY = {

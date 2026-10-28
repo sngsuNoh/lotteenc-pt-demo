@@ -11,7 +11,7 @@ import { esc } from './format.js';
 
 const ROUTES = { '': home, check, report, slides, laws, market, method };
 const TAB = { '': 'verify', check: 'verify', report: 'verify', slides: 'slides', laws: 'laws', market: 'market', method: 'method' };
-const SITE = '자재비 인상 요청 검토 자동화 도구';
+const SITE = '자재비 증액 요청 검증 자동화 도구';
 
 let cleanups = [];
 let lastRoute = null;
