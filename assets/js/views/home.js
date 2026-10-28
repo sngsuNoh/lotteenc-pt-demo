@@ -10,11 +10,14 @@ export function slipHTML(c, res, opts = {}) {
   const item = res.facts.rows.map((r) => r.material).join(', ');
   const label = opts.label || `${item} 자재비 조정 요청`;
   const href = opts.href || `#/check/${c.id}`;
-  return `<a class="slip" href="${esc(href)}" aria-label="${esc(`${label}, ${c.partner}, ${pct(c.requestedRate)} 인상 요청, 판정 ${res.decisionInfo.label}`)}">
+  // 요청액이 다르면 인정액만으로는 비교가 안 되므로, 요청액 대비 인정 비율을 함께 보인다.
+  const share = res.requestedAmount > 0 ? res.recognizedNow / res.requestedAmount : null;
+  const aria = `${label}, ${c.partner}, ${pct(c.requestedRate)} 증액 요청 ${won(res.requestedAmount)}, 판정 ${res.decisionInfo.label}, 우선 인정 ${won(res.recognizedNow)}${share !== null ? `(요청액의 ${pct(share)})` : ''}`;
+  return `<a class="slip" href="${esc(href)}" aria-label="${esc(aria)}">
     <span class="slip-kind">${esc(label)}</span>
     <span class="slip-partner">${esc(c.partner)}</span>
-    <span class="slip-req">${esc(pct(c.requestedRate))}<small>인상 요청</small></span>
-    <span class="slip-facts">생산자물가 <b>${esc(pct(res.indexRate, { sign: true }))}</b><br>우선 인정 <b>${esc(won(res.recognizedNow))}</b></span>
+    <span class="slip-req">${esc(pct(c.requestedRate))}<small>증액 요청 <b class="nw">${esc(won(res.requestedAmount))}</b></small></span>
+    <span class="slip-facts">생산자물가 <b>${esc(pct(res.indexRate, { sign: true }))}</b><br>우선 인정 <b class="nw">${esc(won(res.recognizedNow))}</b>${share !== null ? `<br>요청액의 <b>${esc(pct(share))}</b>` : ''}</span>
     ${stampHTML(res.decision, { land: !!opts.land, delay: opts.delay || 0 })}
   </a>`;
 }
@@ -38,7 +41,7 @@ export function render(page) {
   const label = (n, x) => `예시 ${n}: ${x.res.facts.rows.map((r) => r.material).join(', ')} 자재비 조정 요청`;
   page.innerHTML = `
     <section class="hero">
-      <h1 class="hero-title"><span class="hero-pre">파트너사 상생과 원가 경쟁력 확보를 실현하는</span><span class="hero-main">자재비 인상 요청<br>검토 자동화 도구</span></h1>
+      <h1 class="hero-title"><span class="hero-pre">파트너사 상생과 원가 경쟁력 확보를 실현하는</span><span class="hero-main">자재비 증액 요청<br>검증 자동화 도구</span></h1>
       <p class="hero-lead">파트너사의 자재비 증액 요청을 한국은행 생산자물가지수와 원가 구조로 검증합니다.<br>각 단계별 담당자 판단에 의한 조정 후 검토 보고서로 결과를 확인합니다.</p>
       <div class="hero-slips">
         ${slipHTML(a.c, a.res, { label: label(1, a), land: true, delay: 450 })}

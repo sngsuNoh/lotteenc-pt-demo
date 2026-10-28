@@ -58,7 +58,7 @@ function ovrBlock(key, o) {
       <p class="override-title">${esc(o.title)}</p>
       <p class="override-cur" data-ovr-cur="${esc(key)}"></p>
       ${valueField}
-      <label class="field"><span class="field-label">사유</span><textarea class="textarea" data-ovr-reason placeholder="${esc(o.placeholder || '예: 세금계산서 3건 확인')}"></textarea><span class="field-hint">보고서의 담당자 개입 기록에 그대로 남습니다.</span></label>
+      <label class="field"><span class="field-label">사유</span><textarea class="textarea" data-ovr-reason placeholder="${esc(o.placeholder || '예: 세금계산서 3건 확인')}"></textarea></label>
       <p class="override-err" hidden></p>
       <div class="btn-row"><button type="button" class="btn btn--primary btn--sm" data-ovr-apply="${esc(key)}">적용</button><button type="button" class="btn btn--secondary btn--sm" data-ovr-cancel="${esc(key)}">취소</button></div>
     </div>
@@ -111,9 +111,12 @@ export function render(page, params, ctx) {
   let polCommitted = { ...s.policy };
   let lastDecision = null;
 
+  // 제목은 덩어리째 줄을 바꾸고(좁은 화면), 설명은 정해 둔 자리에서 줄을 바꾼다.
+  const titleHTML = isNew ? '' : (s.base.titleLines || [caseTitle(s)]).map((t) => `<span class="nw">${esc(t)}</span>`).join(' ');
+  const noteHTML = isNew ? '' : (s.base.noteLines || [s.base.note]).map(esc).join('<br>');
   const head = isNew
-    ? `<div class="page-head"><h1 class="page-title">직접 입력해 검증하기</h1><p class="page-lead">요청서 내용을 넣으면 단계마다 결과가 바로 바뀝니다. 입력한 내용은 이 브라우저에만 저장되고 어디로도 전송되지 않습니다.</p></div>`
-    : `<div class="page-head"><h1 class="page-title">${esc(caseTitle(s))}</h1><p class="page-lead">${esc(s.base.note)} 요청과 파트너사는 가상입니다.</p></div>`;
+    ? `<div class="page-head"><h1 class="page-title">직접 입력해 검증하기</h1><p class="page-lead"><span class="nw">요청서 내용을 입력하면</span> <span class="nw">단계별 결과가 실시간 반영됩니다.</span></p></div>`
+    : `<div class="page-head"><h1 class="page-title">${titleHTML}</h1><p class="page-lead">${noteHTML}</p><p class="page-note">요청과 파트너사는 가상입니다.</p></div>`;
 
   const step0 = `
     <p>요청서에 적힌 내용을 옮깁니다. 숫자는 쉼표 없이 입력해도 됩니다.</p>
@@ -156,7 +159,7 @@ export function render(page, params, ctx) {
     <p>공표 지표로 파트너사 요청을 대조합니다. 품목 및 원료 가격 지표를 확인합니다.</p>
     <div data-out="2"></div>
     <div class="sub">담당자 개입</div>
-    <p>지표를 다른 품목으로 바꾸거나, 실매입 자료로 확인한 상승률을 넣을 수 있습니다. 바꾼 값과 사유는 보고서에 남습니다.</p>
+    <p>지표를 다른 품목으로 바꾸거나, 실매입 자료로 확인한 상승률을 넣을 수 있습니다. 바꾼 값과 사유는 보고서에 기록됩니다.</p>
     <div data-indexkeys></div>
     ${ovrBlock('indexRate', { kind: 'pct', title: '지표 상승률 직접 입력', valueLabel: '적용할 지표 상승률', placeholder: '예: 같은 규격 직접 구매 단가 상승률로 대체' })}
     ${ovrBlock('evidence', { kind: 'pct', title: '증빙으로 확인한 상승률', valueLabel: '증빙 상승률', placeholder: '예: 세금계산서 3건 평균, 운반비 포함' })}`;
@@ -204,7 +207,7 @@ export function render(page, params, ctx) {
         <p>기준월을 앞당기면 상승률이 커 보입니다. 기준월은 계약월이나 직전 조정월로 고정합니다.</p>
         <div data-out="sens" style="margin-top:12px"></div>`)}
       ${panelShell('audit', PANEL_ICON.audit, '담당자 개입 기록', `
-        <p>자동 계산값을 바꾼 내용과 사유입니다. 보고서에도 그대로 들어갑니다.</p>
+        <p>자동 계산값을 바꾼 내용과 사유입니다.</p>
         <ul class="audit" data-out="audit" style="margin-top:8px"></ul>`)}
       </div>
       <div class="btn-col" style="margin-top:16px">
@@ -216,6 +219,8 @@ export function render(page, params, ctx) {
   const q = (sel) => page.querySelector(sel);
   const out = (k) => page.querySelector(`[data-out="${k}"]`);
   const sum = (k) => page.querySelector(`[data-sum="${k}"]`);
+  // 금액·날짜는 줄이 바뀌어도 한 덩어리로 넘어가게 한다
+  const nw = (t) => `<span class="nw">${esc(t)}</span>`;
 
   // ------------------------------------------------------------ 자재 행
   function renderItems() {
@@ -332,7 +337,7 @@ export function render(page, params, ctx) {
     const provisional = S.data.provisional.includes(req.compareMonth) || S.data.provisional.includes(req.baseMonth);
     q('[data-hint="compareMonth"]').textContent = provisional ? `최근 공표분(${provisionalLabel()})은 나중에 수정될 수 있어, 합의 전에 확정치를 다시 확인합니다.` : '요청 시점의 최신 공표월';
     if (ok) {
-      sum(0).textContent = `${req.partner || '파트너사'}, ${res.facts.rows.map((x) => x.material).join('·')} ${pct(res.requested)} 요청(${won(res.requestedAmount)})`;
+      sum(0).innerHTML = `${esc(req.partner || '파트너사')}, ${esc(res.facts.rows.map((x) => x.material).join('·'))} 자재비 ${esc(pct(res.requested))} 증액 요청${nw(`(${won(res.requestedAmount)})`)}`;
       out(0).innerHTML = `<dl class="ledger" style="margin-top:14px"><dt>요청액</dt><dd>${esc(won(res.requestedAmount))}<small>재료비 × 요청 상승률</small></dd>${res.facts.rows.length > 1 ? res.facts.rows.map((x) => `<dt>${esc(x.material)} 비중</dt><dd>${esc(pct(x.weight, { d: 0 }))}</dd>`).join('') : ''}</dl>`;
     } else {
       sum(0).textContent = '입력을 확인하세요.';
@@ -354,7 +359,7 @@ export function render(page, params, ctx) {
     const w1 = res.warnings.filter((w) => /부당특약|조정 협의 대상|귀책/.test(w));
     const w2 = res.warnings.filter((w) => !w1.includes(w));
     const trackShort = req.linked ? '연동 약정 산식' : req.subcontract ? '하도급법 조정 협의' : '구매계약 단가 협의';
-    sum(1).textContent = res.schedule ? `${trackShort}, ${day(res.schedule.consultBy)}까지 협의 개시` : trackShort;
+    sum(1).innerHTML = res.schedule ? `${esc(trackShort)}, ${nw(`${day(res.schedule.consultBy)}까지`)} 협의 개시` : esc(trackShort);
     out(1).innerHTML = `<dl class="ledger" style="margin-top:14px">
         <dt>협의 경로</dt><dd style="font-weight:600;max-width:15em">${esc(res.track)}</dd>
         ${res.schedule ? `<dt>접수일</dt><dd>${esc(day(res.schedule.received))}</dd>
@@ -363,12 +368,12 @@ export function render(page, params, ctx) {
       </dl>${w1.map((w) => `<p class="callout" style="margin-top:10px">${esc(w)}</p>`).join('')}`;
 
     // 2. 가격 사실
-    sum(2).textContent = `${ovIdxLabel(s)} ${pct(res.indexRate, { sign: true })}, 요청과 ${pp(Math.abs(res.gapPp))} 차이`;
+    sum(2).textContent = `${ovIdxLabel(s)} ${pct(res.indexRate, { sign: true })}, 제시 증액률과 ${pp(Math.abs(res.gapPp))} 차이`;
     const band = res.facts.band;
     const ovIdx = s.overrides.indexRate;
     out(2).innerHTML = `
       <div class="fact-big"><b>${esc(pct(res.indexRate, { sign: true }))}</b><span>${ovIdx ? '담당자가 입력한 지표 상승률' : `품목 생산자물가지수 상승률(${esc(ym(req.baseMonth))} → ${esc(ym(res.comp))})`}</span></div>
-      <p style="margin-top:4px">요청 ${esc(pct(res.requested))}와 ${esc(pp(Math.abs(res.gapPp)))} 차이${res.multiple ? `, 지표의 ${esc(times(res.multiple))}` : ''}입니다.${ovIdx ? ` 자동 계산값은 ${esc(pct(res.autoIndexRate, { sign: true }))}입니다.` : ''}</p>
+      <p style="margin-top:4px">파트너사 제시 증액률 ${esc(pct(res.requested))}와 <span class="nw">${esc(pp(Math.abs(res.gapPp)))} 차이입니다.</span>${ovIdx ? ` 자동 계산값은 ${esc(pct(res.autoIndexRate, { sign: true }))}입니다.` : ''}</p>
       <dl class="ledger" style="margin-top:12px">
         ${res.facts.rows.map((x, i, arr) => `<dt>${esc(x.name)}${x.indexKey !== x.key ? ` <span class="tag">대조 지표 변경</span>` : ''}${arr.length > 1 ? `<small class="muted" style="display:block;font-size:12.5px">비중 ${esc(pct(x.weight, { d: 0 }))}</small>` : ''}</dt><dd>${esc(num(x.v0))} → ${esc(num(x.v1))}<small>${esc(pct(x.rate, { sign: true }))}</small></dd>`).join('')}
         ${band ? `<dt class="is-last">원료 가격 변동으로 설명 가능한 범위<small class="muted" style="display:block;font-size:12.5px">${esc(band.inputs.join('·'))} 기준, 90% 신뢰구간</small></dt><dd class="is-last">${esc(pct(band.lo))} ~ ${esc(pct(band.hi))}</dd>` : '<dt class="is-last">원료 가격 변동으로 설명 가능한 범위</dt><dd class="is-last">이 품목은 원료 경로가 없습니다</dd>'}
@@ -397,7 +402,7 @@ export function render(page, params, ctx) {
     cur('evidence', `지금 최대 인정 상승률: ${pct(res.rateMax)}. 증빙 상승률을 넣으면 요청 ${pct(res.requested)} 안에서 최대치를 올립니다.`);
 
     // 3. 범위
-    sum(3).textContent = `조정 대상 재료비 ${won(res.eligible)}(재료비의 ${pct(res.share, { d: 0 })})`;
+    sum(3).innerHTML = `조정 대상 재료비 ${nw(won(res.eligible))}${nw(`(재료비의 ${pct(res.share, { d: 0 })})`)}`;
     out(3).innerHTML = `<dl class="ledger" style="margin-top:14px">
       <dt>계약 재료비</dt><dd>${esc(won(req.materialCost))}</dd>
       <dt>기성분 제외</dt><dd>${esc(won(-req.materialCost * (req.progressDone || 0)))}<small>기성 ${esc(pct(req.progressDone || 0))}</small></dd>
@@ -407,7 +412,7 @@ export function render(page, params, ctx) {
 
     // 4. 산정
     const ovApp = s.overrides.appliedRate;
-    sum(4).textContent = `우선 인정 ${won(res.recognizedNow)}${res.recognizedMax > res.recognizedNow + 1 ? `, 소명 시 최대 ${won(res.recognizedMax)}` : ''}`;
+    sum(4).innerHTML = `우선 인정 ${nw(won(res.recognizedNow))}${res.recognizedMax > res.recognizedNow + 1 ? `, 소명 시 최대 ${nw(won(res.recognizedMax))}` : ''}`;
     out(4).innerHTML = `
       <div class="fact-big"><b>${esc(won(res.recognizedNow))}</b><span>우선 인정액</span></div>
       <p style="margin-top:4px">조정 대상 재료비 ${esc(won(res.eligible))} × 적용 상승률 ${esc(pct(res.rateNow))}${ovApp ? '(담당자 조정)' : ''}${res.recognizedMax > res.recognizedNow + 1 ? `. 증빙으로 소명되면 최대 ${esc(won(res.recognizedMax))}(${esc(pct(res.rateMax))})까지 인정합니다` : ''}.</p>

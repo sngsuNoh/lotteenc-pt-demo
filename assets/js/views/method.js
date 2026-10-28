@@ -24,7 +24,7 @@ export function render(page) {
     <section class="section" style="margin-top:8px">
       <h2 class="section-title">검증 순서</h2>
       <ol class="steps-list section-body">
-        <li><b>접수</b><span>파트너사의 자재비 인상 요청으로부터 업체 정보, 자재, 재료비, 기준월과 비교월, 요청 상승률을 파악합니다.</span></li>
+        <li><b>접수</b><span>파트너사의 자재비 증액 요청으로부터 업체 정보, 자재, 재료비, 기준월과 비교월, 요청 상승률을 파악합니다.</span></li>
         <li><b>자격 검증</b><span>하도급과 직접 구매 등 거래의 형태, 연동 약정과 부당특약 여부를 검증한 후 협의 경로와 법정 기간을 제시합니다.</span></li>
         <li><b>가격 사실 검증</b><span>품목별 생산자물가지수, 원료 가격 변동, 실매입 증빙, 직접 구매 단가를 활용해 검증합니다.</span></li>
         <li><b>범위 검증</b><span>기성분, 선매입 재고, 선급금을 제외한 잔여 물량을 검증합니다.</span></li>

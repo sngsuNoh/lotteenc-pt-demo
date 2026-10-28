@@ -56,14 +56,11 @@ function auditHTML(s, limit = 0) {
   return `<ul class="rlist">${shown.map((a) => `<li>${esc(a.step)}: ${esc(a.what)} ${esc(a.from)} → ${esc(a.to)}. 사유: ${esc(a.reason)}</li>`).join('')}${more > 0 ? `<li>그 밖에 ${more}건은 검증 화면의 개입 기록에 있습니다.</li>` : ''}</ul>`;
 }
 
-function guardHTML(g, author) {
-  const who = author === 'claude'
-    ? '문장은 Claude가 이 예시의 엔진 결과를 보고 미리 썼습니다.'
-    : '문장은 입력값으로 만든 규칙 기반 문장입니다.';
+function guardHTML(g) {
   if (g.ok) {
-    return `<p class="guard">${ICON.check}<span>숫자 확인: 문장 속 숫자 ${g.count}개가 모두 검증 엔진 계산값과 일치합니다. ${esc(who)}</span></p>`;
+    return `<p class="guard">${ICON.check}<span>계산값 검증: 문장 속 숫자 ${g.count}개가 모두 검증 엔진 계산값과 일치합니다.</span></p>`;
   }
-  return `<p class="guard is-bad">${ICON.alert}<span>숫자 확인: 엔진 계산값과 맞지 않는 숫자 ${g.offenders.length}개(${esc(g.offenders.join(', '))})가 있습니다. 해당 문장을 고친 뒤 쓰세요. ${esc(who)}</span></p>`;
+  return `<p class="guard is-bad">${ICON.alert}<span>계산값 검증: 엔진 계산값과 맞지 않는 숫자 ${g.offenders.length}개(${esc(g.offenders.join(', '))})가 있습니다. 해당 문장을 고친 뒤 쓰세요.</span></p>`;
 }
 
 function chartCfg(s, res, opts = {}) {
@@ -84,7 +81,7 @@ function chartCfg(s, res, opts = {}) {
     months,
     series,
     refs: [{ y: 100 * (1 + res.requested), label: `요청 ${pct(res.requested)}`, legend: '요청 수준' }],
-    range: row.band ? { at, lo: 100 * (1 + row.band.lo), hi: 100 * (1 + row.band.hi), legend: '원료 가격 변동으로 설명 가능한 범위' } : null,
+    range: null, // 보고서 그래프에서는 설명 범위 막대와 범례를 뺀다(범위 숫자는 가격 근거 문장에 있음)
     marks: [{ at: months.indexOf(base), label: '기준월' }, { at, label: '비교월' }].filter((m) => m.at >= 0),
     height: opts.height || 210,
     yFmt: (t) => String(Math.round(t)),
