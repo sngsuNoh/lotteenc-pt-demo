@@ -29,7 +29,7 @@ const label = { fast: '신속 반영', explain: '소명 요청', deep: '정밀 �
 let fail = 0;
 for (const c of cases) {
   const r = verify(data, c);
-  const p = py[c.id];
+  const p = py[c.sourceId || c.id];
   const checks = [
     ['decision', label[r.decision], p.decision],
     ['index_pct', Math.round(r.indexRate * 1000) / 10, p.index_pct],

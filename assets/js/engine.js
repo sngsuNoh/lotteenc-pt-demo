@@ -95,7 +95,7 @@ export function seriesName(data, key) {
   return s ? s.short : key;
 }
 
-// 원료(대표 경로)로 설명되는 상승률 범위. 원료가 기간 중 올랐으면 고점까지의 상승을, 아니면 비교월 변화를 쓴다.
+// 원료 가격 변동(대표 경로)으로 설명 가능한 상승률 범위. 원료가 기간 중 올랐으면 고점까지의 상승을, 아니면 비교월 변화를 쓴다.
 export function explainedBand(data, item, base, comp) {
   const x = data.primaryInput[item];
   if (!x) return null;
@@ -249,8 +249,8 @@ export function verify(data, req, policy = DEFAULT_POLICY, overrides = {}) {
   if (req.restrictClause) warnings.push('계약서의 조정 신청 제한 조항은 부당특약으로 볼 수 있어(하도급법 시행령 제6조의4 제4호), 그 조항을 근거로 협의를 거절하지 않습니다.');
   if (!req.subcontract) warnings.push('하도급법 조정 협의 대상이 아닐 수 있어, 구매계약 조건에 따라 협의하고 상생협약의 신속 조정 기준을 준용합니다.');
   if (req.delayMonths) warnings.push(`파트너사 귀책 지연 ${req.delayMonths}개월: 비교월을 원래 공정 시점인 ${Number(comp.slice(0, 4))}년 ${Number(comp.slice(5, 7))}월로 당겨 계산했습니다.`);
-  if (facts.band && requested > facts.band.hi && indexRate > 0) warnings.push('요청이 원료로 설명되는 범위의 상단을 넘습니다. 원가 구성 소명을 받아야 합니다.');
-  if (facts.band && autoIndexRate > facts.band.hi + 0.005) warnings.push('품목 지표 자체가 원료로 설명되는 범위보다 더 올랐습니다. 원료 외 요인(에너지·운송·수급)을 함께 봅니다.');
+  if (facts.band && requested > facts.band.hi && indexRate > 0) warnings.push('요청이 원료 가격 변동으로 설명 가능한 범위의 상단을 넘습니다. 원가 구성 소명을 받아야 합니다.');
+  if (facts.band && autoIndexRate > facts.band.hi + 0.005) warnings.push('품목 지표 자체가 원료 가격 변동으로 설명 가능한 범위보다 더 올랐습니다. 원료 외 요인(에너지·운송·수급)을 함께 봅니다.');
 
   return {
     ok: true,

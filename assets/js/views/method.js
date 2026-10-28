@@ -42,8 +42,6 @@ export function render(page) {
       <ul class="rulecards section-body">
         ${rules.map((r) => `<li data-v="${r.code}">${vchipHTML(r.code)}<p class="rule-cond">${esc(r.cond)}</p><p class="rule-act">${esc(r.act)}</p></li>`).join('')}
       </ul>
-      <p class="example">예: 지표가 20% 올랐다면, 요청 22%는 신속 반영(20% + 3%p = 23% 이하), 요청 28%는 소명 요청(20% × 1.5 = 30% 이하), 요청 40%는 정밀 검증입니다.</p>
-      <p class="small ink2" style="margin-top:10px">허용오차와 소명 요청 배수는 검증 화면의 정책 변수에서 바꿔 볼 수 있고, 9개 조합의 판정을 함께 보여 줍니다.</p>
     </section>
 
     ${creditHTML()}`;

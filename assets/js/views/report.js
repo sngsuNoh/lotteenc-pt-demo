@@ -84,7 +84,7 @@ function chartCfg(s, res, opts = {}) {
     months,
     series,
     refs: [{ y: 100 * (1 + res.requested), label: `요청 ${pct(res.requested)}`, legend: '요청 수준' }],
-    range: row.band ? { at, lo: 100 * (1 + row.band.lo), hi: 100 * (1 + row.band.hi), legend: '원료로 설명되는 범위' } : null,
+    range: row.band ? { at, lo: 100 * (1 + row.band.lo), hi: 100 * (1 + row.band.hi), legend: '원료 가격 변동으로 설명 가능한 범위' } : null,
     marks: [{ at: months.indexOf(base), label: '기준월' }, { at, label: '비교월' }].filter((m) => m.at >= 0),
     height: opts.height || 210,
     yFmt: (t) => String(Math.round(t)),
@@ -208,7 +208,7 @@ function buildA4(el, s, r, info, mode) {
 }
 
 function safeName(t) {
-  return String(t || '').replace(/[\\/:*?"<>|\s]+/g, '').slice(0, 24);
+  return String(t || '').replace(/\(주\)|㈜/g, '').replace(/[\\/:*?"<>|\s]+/g, '').slice(0, 24);
 }
 
 // ---------------------------------------------------------------- 화면
@@ -216,7 +216,7 @@ export function render(page, params, ctx) {
   const id = params[0] || 'new';
   const s = getSession(id);
   if (!s) {
-    page.innerHTML = '<div class="empty"><p class="empty-title">없는 보고서입니다.</p><p><a href="#/cases">예시 5건으로 돌아가기</a></p></div>';
+    page.innerHTML = '<div class="empty"><p class="empty-title">없는 보고서입니다.</p><p><a href="#/">처음으로 돌아가기</a></p></div>';
     return;
   }
   const r = compute(s);
@@ -226,7 +226,6 @@ export function render(page, params, ctx) {
   }
   const info = docInfo(s, r);
   let mode = params[1] === 'reply' ? 'reply' : 'internal';
-  let preview = false;
   document.body.classList.add('has-a4');
   ctx.onCleanup(() => {
     document.body.classList.remove('has-a4');
@@ -236,7 +235,7 @@ export function render(page, params, ctx) {
 
   page.innerHTML = `
     <a class="backlink" href="#/check/${esc(id)}">${ICON.back}검증 화면</a>
-    <div class="page-head"><h1 class="page-title">검토 보고서</h1><p class="page-lead"></p></div>
+    <div class="page-head"><h1 class="page-title">검토 보고서</h1></div>
     <div class="report-tools">
       <div class="seg" role="group" aria-label="보고서 종류">
         <button type="button" data-mode="internal" aria-pressed="${mode === 'internal'}">내부 검토 보고서</button>
@@ -246,42 +245,21 @@ export function render(page, params, ctx) {
         <button type="button" class="btn btn--primary" data-act="pdf">${ICON.download}PDF 내려받기</button>
         <button type="button" class="btn btn--secondary" data-act="print">${ICON.print}인쇄</button>
       </div>
-      <button type="button" class="linkbtn" data-act="preview" aria-expanded="false" style="justify-self:start">A4 미리보기</button>
       <p class="small ink2" data-fallback hidden></p>
     </div>
-    <div data-mobile></div>
-    <div class="a4-preview" data-preview hidden></div>`;
+    <div data-mobile></div>`;
 
-  const lead = page.querySelector('.page-lead');
   const mobile = page.querySelector('[data-mobile]');
-  const prev = page.querySelector('[data-preview]');
   const host = document.getElementById(HOST);
   let disposer = null;
 
   function draw() {
     if (disposer) disposer();
     disposer = null;
-    lead.textContent = `${caseTitle(s)}. PDF는 A4 ${mode === 'reply' ? '한' : '두'} 쪽으로 저장됩니다.`;
     mobile.innerHTML = mode === 'reply' ? mobileReply(s, r, info) : mobileInternal(s, r, info);
     const box = mobile.querySelector('[data-chart="m"]');
     if (box) disposer = lineChart(box, chartCfg(s, r.res, { table: true }));
     buildA4(host, s, r, info, mode);
-    if (preview) drawPreview();
-  }
-
-  function drawPreview() {
-    prev.innerHTML = '';
-    const w = prev.clientWidth || page.clientWidth;
-    const scale = Math.min(1, w / 794);
-    host.querySelectorAll('.a4').forEach((pg) => {
-      const frame = document.createElement('div');
-      frame.className = 'a4-preview-page';
-      frame.style.height = `${Math.round(1123 * scale)}px`;
-      const copy = pg.cloneNode(true);
-      copy.style.transform = `scale(${scale})`;
-      frame.appendChild(copy);
-      prev.appendChild(frame);
-    });
   }
 
   page.addEventListener('click', async (e) => {
@@ -293,12 +271,6 @@ export function render(page, params, ctx) {
       draw();
     } else if (t.dataset.act === 'print') {
       window.print();
-    } else if (t.dataset.act === 'preview') {
-      preview = !preview;
-      prev.hidden = !preview;
-      t.setAttribute('aria-expanded', String(preview));
-      t.textContent = preview ? 'A4 미리보기 닫기' : 'A4 미리보기';
-      if (preview) drawPreview();
     } else if (t.dataset.act === 'pdf') {
       t.disabled = true;
       const kind = mode === 'reply' ? '회신문' : '검토보고서';

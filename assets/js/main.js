@@ -1,7 +1,6 @@
 // 해시 라우터와 하단 탭.
 import { loadAll, S } from './store.js';
 import * as home from './views/home.js';
-import * as cases from './views/cases.js';
 import * as check from './views/check.js';
 import * as report from './views/report.js';
 import * as slides from './views/slides.js';
@@ -10,9 +9,9 @@ import * as market from './views/market.js';
 import * as method from './views/method.js';
 import { esc } from './format.js';
 
-const ROUTES = { '': home, cases, check, report, slides, laws, market, method };
-const TAB = { '': 'verify', cases: 'verify', check: 'verify', report: 'verify', slides: 'slides', laws: 'laws', market: 'market', method: 'method' };
-const SITE = '자재비 증액 검증 데모';
+const ROUTES = { '': home, check, report, slides, laws, market, method };
+const TAB = { '': 'verify', check: 'verify', report: 'verify', slides: 'slides', laws: 'laws', market: 'market', method: 'method' };
+const SITE = '자재비 인상 요청 검토 자동화 도구';
 
 let cleanups = [];
 let lastRoute = null;

@@ -14,7 +14,7 @@ export function slipHTML(c, res, opts = {}) {
     <span class="slip-kind">${esc(label)}</span>
     <span class="slip-partner">${esc(c.partner)}</span>
     <span class="slip-req">${esc(pct(c.requestedRate))}<small>인상 요청</small></span>
-    <span class="slip-facts">지표 <b>${esc(pct(res.indexRate, { sign: true }))}</b><br>우선 인정 <b>${esc(won(res.recognizedNow))}</b></span>
+    <span class="slip-facts">생산자물가 <b>${esc(pct(res.indexRate, { sign: true }))}</b><br>우선 인정 <b>${esc(won(res.recognizedNow))}</b></span>
     ${stampHTML(res.decision, { land: !!opts.land, delay: opts.delay || 0 })}
   </a>`;
 }
@@ -34,7 +34,7 @@ export function render(page) {
   const all = originalResults();
   const pick = (id) => all.find((x) => x.c.id === id);
   const a = pick('S1');
-  const b = pick('S4');
+  const b = pick('S2');
   const label = (n, x) => `예시 ${n}: ${x.res.facts.rows.map((r) => r.material).join(', ')} 자재비 조정 요청`;
   page.innerHTML = `
     <section class="hero">

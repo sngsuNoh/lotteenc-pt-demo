@@ -72,12 +72,37 @@ function stepShell(n, titleText, body, open) {
   </details>`;
 }
 
+const PANEL_ICON = {
+  pol: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>',
+  base: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14.5" rx="2"/><path d="M4 10h16M9 3.5v4M15 3.5v4"/></svg>',
+  audit: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 7h10M9.5 12h10M9.5 17h10"/><circle cx="5.5" cy="7" r="1"/><circle cx="5.5" cy="12" r="1"/><circle cx="5.5" cy="17" r="1"/></svg>',
+};
+
+// 0~4단계와 같은 모양의 접는 상자(번호 대신 아이콘)
+function panelShell(key, icon, titleText, body) {
+  return `<details class="step step--panel" data-panel="${key}">
+    <summary><span class="step-no" aria-hidden="true">${icon}</span><span><span class="step-title">${esc(titleText)}</span><span class="step-result" data-sum="${key}"></span></span>${ICON.caret}</summary>
+    <div class="step-body">${body}</div>
+  </details>`;
+}
+
+function provisionalLabel() {
+  const p = S.data.provisional || [];
+  if (!p.length) return '최근';
+  const [y1, m1] = p[0].split('-').map(Number);
+  const [y2, m2] = p[p.length - 1].split('-').map(Number);
+  if (p.length === 1) return `${y1}년 ${m1}월`;
+  return y1 === y2 ? `${y1}년 ${m1}~${m2}월` : `${y1}년 ${m1}월~${y2}년 ${m2}월`;
+}
+
+const ovIdxLabel = (s) => (s.overrides.indexRate ? '담당자 입력 상승률' : '생산자물가지수');
+
 // ---------------------------------------------------------------- 화면
 export function render(page, params, ctx) {
   const id = params[0] || 'new';
   const s = getSession(id);
   if (!s) {
-    page.innerHTML = `<div class="empty"><p class="empty-title">없는 예시입니다.</p><p><a href="#/cases">예시 5건으로 돌아가기</a></p></div>`;
+    page.innerHTML = `<div class="empty"><p class="empty-title">없는 예시입니다.</p><p><a href="#/">처음으로 돌아가기</a></p></div>`;
     return;
   }
   const isNew = id === 'new';
@@ -87,18 +112,16 @@ export function render(page, params, ctx) {
   let lastDecision = null;
 
   const head = isNew
-    ? `<a class="backlink" href="#/">${ICON.back}처음으로</a>
-       <div class="page-head"><h1 class="page-title">직접 입력해 검증하기</h1><p class="page-lead">요청서 내용을 넣으면 단계마다 결과가 바로 바뀝니다. 입력한 내용은 이 브라우저에만 저장되고 어디로도 전송되지 않습니다.</p></div>`
-    : `<a class="backlink" href="#/cases">${ICON.back}예시 5건</a>
-       <div class="page-head"><h1 class="page-title">${esc(caseTitle(s))}</h1><p class="page-lead">${esc(s.base.note)} 요청과 파트너사는 가상입니다.</p></div>`;
+    ? `<div class="page-head"><h1 class="page-title">직접 입력해 검증하기</h1><p class="page-lead">요청서 내용을 넣으면 단계마다 결과가 바로 바뀝니다. 입력한 내용은 이 브라우저에만 저장되고 어디로도 전송되지 않습니다.</p></div>`
+    : `<div class="page-head"><h1 class="page-title">${esc(caseTitle(s))}</h1><p class="page-lead">${esc(s.base.note)} 요청과 파트너사는 가상입니다.</p></div>`;
 
   const step0 = `
     <p>요청서에 적힌 내용을 옮깁니다. 숫자는 쉼표 없이 입력해도 됩니다.</p>
     <div class="field-row">
-      <label class="field"><span class="field-label">파트너사</span><input class="input" data-f="partner" autocomplete="off" placeholder="예: 가상 F방수" value="${esc(req.partner)}"></label>
+      <label class="field"><span class="field-label">파트너사</span><input class="input" data-f="partner" autocomplete="off" placeholder="예: (주)C방수" value="${esc(req.partner)}"></label>
       <label class="field"><span class="field-label">접수일</span><input class="input" type="date" data-f="received" value="${esc(req.received || '')}"></label>
     </div>
-    <label class="field"><span class="field-label">공사</span><input class="input" data-f="site" autocomplete="off" placeholder="예: 가상 공동주택 현장, 방수 공사" value="${esc(req.site || '')}"></label>
+    <label class="field"><span class="field-label">공사</span><input class="input" data-f="site" autocomplete="off" placeholder="예: C지구 공동주택 현장, 방수 공사" value="${esc(req.site || '')}"></label>
     <div data-items></div>
     <button type="button" class="btn btn--quiet btn--sm" data-add-item>${ICON.plus}자재 추가</button>
     <label class="field"><span class="field-label">계약 재료비</span><span class="affix"><input class="input" data-f="materialCost" inputmode="numeric" autocomplete="off" value="${esc(wonInput(req.materialCost))}"><span class="affix-unit">원</span></span><span class="field-hint" data-hint="materialCost"></span></label>
@@ -130,7 +153,7 @@ export function render(page, params, ctx) {
     <div data-out="1"></div>`;
 
   const step2 = `
-    <p>공표 지표로 요청을 대조합니다. 품목 지표를 먼저 보고, 원료로 설명되는 범위를 확인한 뒤, 넘는 부분은 증빙으로 봅니다.</p>
+    <p>공표 지표로 파트너사 요청을 대조합니다. 품목 및 원료 가격 지표를 확인합니다.</p>
     <div data-out="2"></div>
     <div class="sub">담당자 개입</div>
     <p>지표를 다른 품목으로 바꾸거나, 실매입 자료로 확인한 상승률을 넣을 수 있습니다. 바꾼 값과 사유는 보고서에 남습니다.</p>
@@ -157,9 +180,9 @@ export function render(page, params, ctx) {
 
   page.innerHTML = `${head}
     <div class="sumbar" data-out="sumbar" aria-live="polite"></div>
-    ${stepShell(0, '접수', step0, isNew)}
+    ${stepShell(0, '접수', step0, false)}
     ${stepShell(1, '자격 검증', step1, false)}
-    ${stepShell(2, '가격 사실 검증', step2, !isNew)}
+    ${stepShell(2, '가격 사실 검증', step2, false)}
     ${stepShell(3, '범위 검증', step3, false)}
     ${stepShell(4, '산정', step4, false)}
 
@@ -169,30 +192,25 @@ export function render(page, params, ctx) {
         <div data-out="dec"></div>
         ${ovrBlock('decision', { kind: 'select', title: '판정 바꾸기', valueLabel: '바꿀 판정', options: decisionOptions, placeholder: '예: 공정 차질이 커서 신속 반영으로 처리' })}
       </div>
-      <div class="sheet">
-        <p class="sheet-title">정책 변수</p>
-        <p class="sheet-sub">판정 기준은 예시값입니다. 실제로는 과거 조정 이력으로 보정합니다.</p>
-        <div class="field"><span class="field-label">신속 반영 허용오차: <b data-pol-val="tol"></b></span><input type="range" min="0" max="10" step="0.5" data-pol="tol" value="${s.policy.tolerancePp * 100}" aria-label="신속 반영 허용오차"><span class="field-hint">요청이 지표에 이 값을 더한 수준 이하면 신속 반영합니다.</span></div>
-        <div class="field"><span class="field-label">소명 요청 배수: <b data-pol-val="mult"></b></span><input type="range" min="1.1" max="3" step="0.1" data-pol="mult" value="${s.policy.explainMultiple}" aria-label="소명 요청 배수"><span class="field-hint">요청이 지표의 이 배수 이하면 소명 요청, 넘으면 정밀 검증입니다.</span></div>
+      <div class="panels">
+      ${panelShell('pol', PANEL_ICON.pol, '정책 변수', `
+        <p>판정 기준은 예시값입니다. 실제로는 과거 조정 이력으로 보정합니다.</p>
+        <div class="field"><span class="field-label">신속 반영 허용오차: <b data-pol-val="tol"></b></span><input type="range" min="0" max="10" step="0.5" data-pol="tol" value="${s.policy.tolerancePp * 100}" aria-label="신속 반영 허용오차"><span class="field-hint">요청 상승률이 지표 상승률에 이 값을 더한 수준 이하면 신속 반영합니다.</span></div>
+        <div class="field"><span class="field-label">소명 요청 배수: <b data-pol-val="mult"></b></span><input type="range" min="1.1" max="3" step="0.1" data-pol="mult" value="${s.policy.explainMultiple}" aria-label="소명 요청 배수"><span class="field-hint">요청 상승률이 지표 상승률의 이 배수 이하면 소명 요청, 넘으면 정밀 검증입니다.</span></div>
         <button type="button" class="linkbtn" data-pol-reset style="margin-top:10px">기본값(3%p, 1.5배)으로</button>
-        <div class="sub" style="margin-top:18px;font-weight:700;font-size:14.5px">정책 변수를 바꿔도 판정이 같은가</div>
-        <div data-out="robust"></div>
-      </div>
-      <div class="sheet">
-        <p class="sheet-title">기준월을 바꾸면</p>
-        <p class="sheet-sub">기준월을 앞당기면 상승률이 커 보입니다. 기준월은 계약월이나 직전 조정월로 고정합니다.</p>
-        <div data-out="sens" style="margin-top:10px"></div>
+        <div class="sub">정책 변수에 따른 판정 강건성 검토</div>
+        <div data-out="robust"></div>`)}
+      ${panelShell('base', PANEL_ICON.base, '기준월 조정', `
+        <p>기준월을 앞당기면 상승률이 커 보입니다. 기준월은 계약월이나 직전 조정월로 고정합니다.</p>
+        <div data-out="sens" style="margin-top:12px"></div>`)}
+      ${panelShell('audit', PANEL_ICON.audit, '담당자 개입 기록', `
+        <p>자동 계산값을 바꾼 내용과 사유입니다. 보고서에도 그대로 들어갑니다.</p>
+        <ul class="audit" data-out="audit" style="margin-top:8px"></ul>`)}
       </div>
       <div class="btn-col" style="margin-top:16px">
         <a class="btn btn--primary" href="#/report/${esc(id)}">${ICON.doc}검토 보고서 보기</a>
         <button type="button" class="btn btn--secondary" data-reset-all>${isNew ? '입력 비우기' : '예시 원래대로'}</button>
       </div>
-    </section>
-
-    <section class="section" aria-labelledby="audit-title">
-      <h2 class="section-title" id="audit-title">담당자 개입 기록</h2>
-      <p class="section-lead">자동 계산값을 바꾼 내용과 사유입니다. 보고서에도 그대로 들어갑니다.</p>
-      <div class="sheet" style="margin-top:12px"><ul class="audit" data-out="audit"></ul></div>
     </section>`;
 
   const q = (sel) => page.querySelector(sel);
@@ -245,7 +263,7 @@ export function render(page, params, ctx) {
       months,
       series,
       refs: [{ y: 100 * (1 + res.requested), label: `요청 ${pct(res.requested)}`, legend: '요청 수준' }],
-      range: row.band ? { at, lo: 100 * (1 + row.band.lo), hi: 100 * (1 + row.band.hi), legend: '원료로 설명되는 범위' } : null,
+      range: row.band ? { at, lo: 100 * (1 + row.band.lo), hi: 100 * (1 + row.band.hi), legend: '원료 가격 변동으로 설명 가능한 범위' } : null,
       marks: [{ at: months.indexOf(base), label: '기준월' }, { at, label: '비교월' }].filter((m) => m.at >= 0),
       height: 230,
       yFmt: (t) => String(Math.round(t)),
@@ -312,10 +330,10 @@ export function render(page, params, ctx) {
     const hint = q('[data-hint="materialCost"]');
     hint.textContent = Number(req.materialCost) > 0 ? `${won(req.materialCost)}` : '숫자로 입력하세요.';
     const provisional = S.data.provisional.includes(req.compareMonth) || S.data.provisional.includes(req.baseMonth);
-    q('[data-hint="compareMonth"]').textContent = provisional ? '7~9월 지표는 잠정치라 확정치로 다시 확인합니다.' : '요청 시점의 최신 공표월';
+    q('[data-hint="compareMonth"]').textContent = provisional ? `최근 공표분(${provisionalLabel()})은 나중에 수정될 수 있어, 합의 전에 확정치를 다시 확인합니다.` : '요청 시점의 최신 공표월';
     if (ok) {
       sum(0).textContent = `${req.partner || '파트너사'}, ${res.facts.rows.map((x) => x.material).join('·')} ${pct(res.requested)} 요청(${won(res.requestedAmount)})`;
-      out(0).innerHTML = `<dl class="ledger" style="margin-top:14px"><dt>요청액</dt><dd>${esc(won(res.requestedAmount))}<small>재료비 × ${esc(pct(res.requested))}</small></dd>${res.facts.rows.length > 1 ? res.facts.rows.map((x) => `<dt>${esc(x.material)} 비중</dt><dd>${esc(pct(x.weight, { d: 0 }))}</dd>`).join('') : ''}</dl>`;
+      out(0).innerHTML = `<dl class="ledger" style="margin-top:14px"><dt>요청액</dt><dd>${esc(won(res.requestedAmount))}<small>재료비 × 요청 상승률</small></dd>${res.facts.rows.length > 1 ? res.facts.rows.map((x) => `<dt>${esc(x.material)} 비중</dt><dd>${esc(pct(x.weight, { d: 0 }))}</dd>`).join('') : ''}</dl>`;
     } else {
       sum(0).textContent = '입력을 확인하세요.';
       out(0).innerHTML = `<div class="callout" style="margin-top:14px">${r.issues.map(esc).join('<br>')}</div>`;
@@ -326,6 +344,8 @@ export function render(page, params, ctx) {
       out('dec').innerHTML = '<p class="ink2">입력이 완성되면 판정이 나옵니다.</p>';
       out('robust').innerHTML = '';
       out('sens').innerHTML = '';
+      sum('pol').textContent = '입력이 완성되면 계산합니다.';
+      sum('base').textContent = '입력이 완성되면 계산합니다.';
       renderAudit();
       return;
     }
@@ -343,15 +363,15 @@ export function render(page, params, ctx) {
       </dl>${w1.map((w) => `<p class="callout" style="margin-top:10px">${esc(w)}</p>`).join('')}`;
 
     // 2. 가격 사실
-    sum(2).textContent = `지표 ${pct(res.indexRate, { sign: true })}, 요청과 ${pp(Math.abs(res.gapPp))} 차이`;
+    sum(2).textContent = `${ovIdxLabel(s)} ${pct(res.indexRate, { sign: true })}, 요청과 ${pp(Math.abs(res.gapPp))} 차이`;
     const band = res.facts.band;
     const ovIdx = s.overrides.indexRate;
     out(2).innerHTML = `
-      <div class="fact-big"><b>${esc(pct(res.indexRate, { sign: true }))}</b><span>${ovIdx ? '담당자가 입력한 지표 상승률' : `지표 상승률(${esc(ym(req.baseMonth))} → ${esc(ym(res.comp))})`}</span></div>
+      <div class="fact-big"><b>${esc(pct(res.indexRate, { sign: true }))}</b><span>${ovIdx ? '담당자가 입력한 지표 상승률' : `품목 생산자물가지수 상승률(${esc(ym(req.baseMonth))} → ${esc(ym(res.comp))})`}</span></div>
       <p style="margin-top:4px">요청 ${esc(pct(res.requested))}와 ${esc(pp(Math.abs(res.gapPp)))} 차이${res.multiple ? `, 지표의 ${esc(times(res.multiple))}` : ''}입니다.${ovIdx ? ` 자동 계산값은 ${esc(pct(res.autoIndexRate, { sign: true }))}입니다.` : ''}</p>
       <dl class="ledger" style="margin-top:12px">
         ${res.facts.rows.map((x, i, arr) => `<dt>${esc(x.name)}${x.indexKey !== x.key ? ` <span class="tag">대조 지표 변경</span>` : ''}${arr.length > 1 ? `<small class="muted" style="display:block;font-size:12.5px">비중 ${esc(pct(x.weight, { d: 0 }))}</small>` : ''}</dt><dd>${esc(num(x.v0))} → ${esc(num(x.v1))}<small>${esc(pct(x.rate, { sign: true }))}</small></dd>`).join('')}
-        ${band ? `<dt class="is-last">원료로 설명되는 범위<small class="muted" style="display:block;font-size:12.5px">${esc(band.inputs.join('·'))} 기준, 90% 신뢰구간</small></dt><dd class="is-last">${esc(pct(band.lo))} ~ ${esc(pct(band.hi))}</dd>` : '<dt class="is-last">원료로 설명되는 범위</dt><dd class="is-last">이 품목은 원료 경로가 없습니다</dd>'}
+        ${band ? `<dt class="is-last">원료 가격 변동으로 설명 가능한 범위<small class="muted" style="display:block;font-size:12.5px">${esc(band.inputs.join('·'))} 기준, 90% 신뢰구간</small></dt><dd class="is-last">${esc(pct(band.lo))} ~ ${esc(pct(band.hi))}</dd>` : '<dt class="is-last">원료 가격 변동으로 설명 가능한 범위</dt><dd class="is-last">이 품목은 원료 경로가 없습니다</dd>'}
       </dl>
       <div data-charts></div>
       ${w2.map((w) => `<p class="callout" style="margin-top:10px">${esc(w)}</p>`).join('')}
@@ -407,12 +427,19 @@ export function render(page, params, ctx) {
     q('[data-pol-val="mult"]').textContent = times(s.policy.explainMultiple);
     out('robust').innerHTML = robustHTML(r.rb);
     out('sens').innerHTML = sensHTML(r.sens);
+    sum('pol').textContent = `허용오차 ${pp(s.policy.tolerancePp)}, 소명 요청 배수 ${times(s.policy.explainMultiple)}. ${r.rb.same === r.rb.total ? `${r.rb.total}개 조합 모두 같은 판정` : `${r.rb.total}개 조합 중 ${r.rb.same}개 같은 판정`}`;
+    const curSens = r.sens.find((x) => x.offset === 0);
+    const flip = r.sens.find((x) => x.rate !== null && x.decision && curSens && x.decision !== curSens.decision);
+    sum('base').textContent = flip
+      ? `기준월 ${ym(req.baseMonth)}. ${ym(flip.base)}로 앞당기면 ${DECISIONS[flip.decision].label}`
+      : `기준월 ${ym(req.baseMonth)}. 앞당겨도 판정 같음`;
 
     renderAudit();
   }
 
   function renderAudit() {
     const box = out('audit');
+    sum('audit').textContent = s.audit.length ? `${s.audit.length}건` : '기록 없음. 모든 값이 자동 계산값입니다.';
     box.innerHTML = s.audit.length
       ? s.audit.slice().reverse().map((a) => `<li><p class="audit-what">${esc(a.step)}: ${esc(a.what)} ${esc(a.from)} → ${esc(a.to)}</p><p class="audit-why">${esc(a.reason)}</p><p class="audit-when">${esc(new Date(a.at).toLocaleString('ko-KR'))}</p></li>`).join('')
       : '<li class="ink2">아직 없습니다. 모든 값이 자동 계산값입니다.</li>';

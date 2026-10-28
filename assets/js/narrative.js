@@ -1,4 +1,4 @@
-// 보고서 문장. 예시 5건은 Claude가 미리 쓴 문장을, 직접 입력한 요청은 규칙 기반 문장을 쓴다.
+// 보고서 문장. 예시 2건은 Claude가 미리 쓴 문장을, 직접 입력한 요청은 규칙 기반 문장을 쓴다.
 // 어느 쪽이든 문장 속 숫자는 엔진 계산값과 대조한다(숫자 가드레일).
 import { pct, pp, times, won, ym, day, num } from './format.js';
 import { DECISIONS, POLICY_GRID } from './engine.js';
@@ -58,7 +58,7 @@ export function ruleNarrative(req, res, ctx) {
   ];
 
   const basis = rows.map((r) => `공표 지표: ${r.name} ${num(r.v0)}(${ym(req.baseMonth)}) → ${num(r.v1)}(${ym(res.comp)}), ${pct(r.rate, { sign: true })}${rows.length > 1 ? `, 비중 ${pct(r.weight, { d: 0 })}` : ''}`);
-  if (band) basis.push(`원료(${band.inputs.join('·')}) 기준 설명 범위: ${pct(band.lo)} ~ ${pct(band.hi)}. ${res.requested > band.hi ? `요청 ${reqp}는 이 범위를 넘습니다.` : `요청 ${reqp}는 이 범위 안입니다.`}`);
+  if (band) basis.push(`원료(${band.inputs.join('·')}) 가격 변동으로 설명 가능한 범위: ${pct(band.lo)} ~ ${pct(band.hi)}. ${res.requested > band.hi ? `요청 ${reqp}는 이 범위를 넘습니다.` : `요청 ${reqp}는 이 범위 안입니다.`}`);
   basis.push(`판정 규칙: 요청이 지표 + ${pp(tol)} 이하면 신속 반영, 지표의 ${times(mult)} 이하면 소명 요청, 그보다 크면 정밀 검증입니다.`);
   if (ctx && ctx.rb) {
     basis.push(ctx.rb.same === ctx.rb.total
