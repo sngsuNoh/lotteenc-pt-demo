@@ -16,6 +16,34 @@ const SITE = '자재비 인상 요청 검토 자동화 도구';
 let cleanups = [];
 let lastRoute = null;
 
+// 하단 탭: 아래로 스크롤하면 숨기고, 위로 스크롤하거나 맨 위에 오면 다시 보인다.
+const tabbar = {
+  el: null,
+  lastY: 0,
+  ticking: false,
+  show() { if (this.el) this.el.classList.remove('is-hidden'); },
+  hide() { if (this.el) this.el.classList.add('is-hidden'); },
+  init() {
+    this.el = document.querySelector('.tabbar');
+    if (!this.el) return;
+    this.lastY = window.scrollY;
+    const step = 6;
+    window.addEventListener('scroll', () => {
+      if (this.ticking) return;
+      this.ticking = true;
+      requestAnimationFrame(() => {
+        this.ticking = false;
+        const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        const y = Math.min(Math.max(window.scrollY, 0), max);
+        const dy = y - this.lastY;
+        if (y < 56) { this.show(); this.lastY = y; return; }
+        if (dy > step) { this.hide(); this.lastY = y; } else if (dy < -step) { this.show(); this.lastY = y; }
+      });
+    }, { passive: true });
+    this.el.addEventListener('focusin', () => this.show());
+  },
+};
+
 function parse() {
   const h = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
   const [name = '', ...rest] = h.split('/').filter((x, i) => x !== '' || i === 0);
@@ -48,7 +76,11 @@ async function render() {
     else a.removeAttribute('aria-current');
   });
   const key = `${name}/${params.join('/')}`;
-  if (key !== lastRoute) window.scrollTo(0, 0);
+  if (key !== lastRoute) {
+    window.scrollTo(0, 0);
+    tabbar.lastY = 0;
+    tabbar.show();
+  }
   lastRoute = key;
 }
 
@@ -61,6 +93,7 @@ async function start() {
     return;
   }
   window.addEventListener('hashchange', render);
+  tabbar.init();
   render();
 }
 
