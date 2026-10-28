@@ -1,7 +1,11 @@
 [
   {
     "id": "S1",
-    "title": "EPS 단열재 40% 요청",
+    "title": "EPS 단열재 자재비 40% 증액 요청",
+    "titleLines": [
+      "EPS 단열재 자재비",
+      "40% 증액 요청"
+    ],
     "partner": "(주)A단열",
     "channel": "outsourced",
     "subcontract": true,
@@ -27,12 +31,20 @@
     "delayMonths": 0,
     "evidenceRate": null,
     "received": "2026-05-12",
-    "note": "EPS 단열재 생산자물가지수는 17.4% 올라, 요청 40%와 차이가 큽니다."
+    "note": "EPS 단열재 생산자물가지수는 17.4% 상승했으며, 파트너사가 제시한 증액 비율 40%와 차이가 큽니다.",
+    "noteLines": [
+      "EPS 단열재 생산자물가지수는 17.4% 상승했으며,",
+      "파트너사가 제시한 증액 비율 40%와 차이가 큽니다."
+    ]
   },
   {
     "id": "S2",
     "sourceId": "S4",
-    "title": "아스콘 40% 요청",
+    "title": "아스콘 자재비 40% 증액 요청",
+    "titleLines": [
+      "아스콘 자재비",
+      "40% 증액 요청"
+    ],
     "partner": "(주)B포장",
     "channel": "outsourced",
     "subcontract": true,
@@ -58,6 +70,10 @@
     "delayMonths": 0,
     "evidenceRate": null,
     "received": "2026-04-20",
-    "note": "아스콘은 원료인 아스팔트 가격 상승으로 설명되는 요청입니다."
+    "note": "아스콘 생산자물가지수는 41.8% 상승했으며, 파트너사가 제시한 증액 비율 40%를 뒷받침합니다.",
+    "noteLines": [
+      "아스콘 생산자물가지수는 41.8% 상승했으며,",
+      "파트너사가 제시한 증액 비율 40%를 뒷받침합니다."
+    ]
   }
 ]
